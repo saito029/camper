@@ -3,11 +3,7 @@ class Post < ApplicationRecord
 
     belongs_to :user
     has_many :comments, dependent: :destroy
-    has_many :favorites, dependent: :destroy
-
-    def favorited_by?(user)
-     favorites.where(user_id: user.id).exists?
-    end
+    has_many :likes
 
     validates :location, presence: true, length: { maximum: 15 }
     validates :text, presence: true, length: { maximum: 195 }

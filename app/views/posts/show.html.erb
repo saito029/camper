@@ -17,11 +17,11 @@
      <div class="row justify-content-center d-block">
        <p class="caption"><%= @post.user.name %></p>
        <%= attachment_image_tag @post, :image, format: 'jpeg', size: "450x350" %><br>
-       <p class="caption"><%= @post.location %>
-     <div id="favorite_btn_<%= @post.id %>">
-       <%= render 'favorites/favorite', post: @post %>
-     </div>
-       </p>
+        <% if current_user.liked_by?(@post) %>
+         <td><%= link_to 'いいねを外す', post_like_path(@post.id), method: :delete %></td>
+        <% else %>
+         <td><%= link_to 'いいね', post_likes_path(@post.id), method: :post %></td>
+        <% end %>
        <h4>感想</h4>
        <p id="text"><%= @post.text %></p>
        <% if @post.user == current_user %>

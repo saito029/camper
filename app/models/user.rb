@@ -6,7 +6,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :favorites, dependent: :destroy
+  has_many :likes
+  def liked_by?(post_id)
+    likes.where(post_id: post_id).exists?
+  end
   has_many :follower, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :followed, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   has_many :following_user, through: :follower, source: :followed
