@@ -22,7 +22,9 @@
     <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "text-white" %></div>
   </header>
   <% end %>
-
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+  <% end %>
   <%= yield %>
 </body>
   </body>
