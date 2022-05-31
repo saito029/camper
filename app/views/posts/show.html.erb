@@ -16,12 +16,11 @@
     <div class="d-flex">
      <div class="row justify-content-center d-block">
        <p class="caption"><%= @post.user.name %></p>
+       <p class="caption"><%= @post.location %>
        <%= attachment_image_tag @post, :image, format: 'jpeg', size: "450x350" %><br>
-        <% if current_user.liked_by?(@post) %>
-         <td><%= link_to 'いいねを外す', post_like_path(@post.id), method: :delete %> <%= @post.likes.count %></td>
-        <% else %>
-         <td><%= link_to 'いいね', post_likes_path(@post.id), method: :post %> <%= @post.likes.count %></td>
-        <% end %>
+       <tr id="post_<%= @post.id %>">
+        <%= render 'likes/like', post: @post %>
+       </tr>
        <h4>感想</h4>
        <p id="text"><%= @post.text %></p>
        <% if @post.user == current_user %>
